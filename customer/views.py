@@ -87,9 +87,9 @@ def register_account(request, national_id):
                                              account_number=random.randrange(int(1e9), int(1e10)), credit=amount)
 
             data['success'] = True
-            data['message'] = _('an account with number %s for customer %s created with credit %s by employee %s'
-                                % (account.account_number, customer.profile.national_id, account.credit,
-                                   employee.profile.national_id))
+            data['message'] = _('an account with number {} for customer {} created with credit {} by employee {}'
+                                ).format(account.account_number, customer.profile.national_id, account.credit,
+                                         employee.profile.national_id)
             return client_form(request, data=data)
         except:
             return HttpResponseRedirect('/customer/register_account/%s' % national_id)
@@ -113,7 +113,7 @@ def disable_account(request):
 
             if not Account.objects.filter(account_number=account_number).exists():
                 data['error'] = True
-                data['message'] = _('There is no account with account number %s' % account_number)
+                data['message'] = _('There is no account with account number {}').format(account_number)
                 return client_form(request, data=data)
 
             account = Account.objects.get(account_number=account_number)
@@ -121,7 +121,7 @@ def disable_account(request):
             account.save()
 
             data['success'] = True
-            data['message'] = _('Account with number %s is disabled' % account.account_number)
+            data['message'] = _('Account with number {} is disabled').format(account.account_number)
             return client_form(request, data=data)
         except:
             data['error'] = True

@@ -28,18 +28,19 @@ def define_bill(request):
 
             if not Account.objects.filter(account_number=account_number).exists():
                 data['error'] = True
-                data['message'] = _('There is no account with account number %s' % account_number)
+                data['message'] = _('There is no account with account number {}').format(account_number)
                 return client_form(request, data=data)
 
             account = Account.objects.get(account_number=account_number)
             if account.state not in 'A':
                 data['error'] = True
-                data['message'] = _('Account %s is not active' % account_number)
+                data['message'] = _('Account {} is not active').format(account_number)
                 return client_form(request, data=data)
 
             bill_type = BillType.objects.create(destination_account=account, name=name)
             data['success'] = True
-            data['message'] = _('Bill %s created with id %s and account number %s' % (name, bill_type.id, account_number))
+            data['message'] = _('Bill {} created with id {} and account number {}').format(name, bill_type.id,
+                                                                                           account_number)
             return client_form(request, data=data)
         except:
             data['error'] = True

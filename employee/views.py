@@ -42,8 +42,9 @@ def register_employee(request):
             employee = Employee.objects.create(profile=profile, branch=branch_admin.branch)
 
             data['success'] = True
-            data['message'] = _('employee with national id %s and password %s is created for branch with id %s'
-                                % (employee.profile.national_id, employee.profile.password, branch_admin.branch.id))
+            data['message'] = _('employee with national id {} and password {} is created for branch with id {}'
+                                ).format(employee.profile.national_id, employee.profile.password,
+                                         branch_admin.branch.id)
             return client_form(request, data=data)
         except:
             data['error'] = True
