@@ -15,7 +15,8 @@ def define_annual_profit(request):
     data = {
         'title': _('Define annual profit'),
         'fields': [
-            {'id': 'annual_profit', 'label': _('Annual profit'), 'value': Bank.objects.all()[0].annual_profit, 'type': 'text'},
+            {'id': 'annual_profit', 'label': _('Annual profit'), 'value': Bank.objects.all()[0].annual_profit,
+             'type': 'text'},
         ]
     }
 
@@ -57,7 +58,7 @@ def create_branch(request):
             branch = Branch.objects.create(address=address)
 
             data['success'] = True
-            data['message'] = _('A branch created with id %s' % branch.id)
+            data['message'] = _('A branch created with id {}').format(branch.id)
             return client_form(request, data=data)
         except:
             data['error'] = True
@@ -69,7 +70,7 @@ def create_branch(request):
 def assign_admin(request):
     data = {
         'title': _('Assign Admin'),
-        'columns': ['Id', 'Address', 'Current Admin', 'Action'],
+        'columns': [_('Id'), _('Address'), _('Current Admin'), _('Action')],
         'entities': []
     }
 
@@ -88,8 +89,8 @@ def assign_admin(request):
 @ValidateRole(['Bank Admin'])
 def assign_admin_branch(request, branch_id):
     data = {
-        'title': _('Assign Admin to Branch %s' % branch_id),
-        'columns': ['Id', 'Name'],
+        'title': _('Assign Admin to Branch {}').format(branch_id),
+        'columns': [_('Id'), _('Name')],
         'entities': []
     }
 
@@ -122,13 +123,13 @@ def assign_admin_branch_national(request, branch_id, national_id):
     if request.method == 'GET':
         if not Branch.objects.filter(id=branch_id).exists():
             data['error'] = True
-            data['message'] = _('No branch with id %s' % branch_id)
+            data['message'] = _('No branch with id {}').format(branch_id)
             return client_form(request, data)
         branch = Branch.objects.get(id=branch_id)
 
         if not BranchAdmin.objects.filter(profile__national_id=national_id).exists():
             data['error'] = True
-            data['message'] = _('No branch admin with %s national id' % national_id)
+            data['message'] = _('No branch admin with {} national id').format(national_id)
             return client_form(request, data=data)
 
         admin = BranchAdmin.objects.get(profile__national_id=national_id)
@@ -137,8 +138,8 @@ def assign_admin_branch_national(request, branch_id, national_id):
         branch.save()
 
         data['success'] = True
-        data['message'] = _('branch %s admin updated to %s %s' % (branch_id, admin.profile.user.first_name,
-                                                                  admin.profile.user.last_name))
+        data['message'] = _('branch {} admin updated to {} {}').format(branch_id, admin.profile.user.first_name,
+                                                                       admin.profile.user.last_name)
         return client_form(request, data)
     if request.method == 'POST':
         return HttpResponseRedirect('/bank/assign_admin')
