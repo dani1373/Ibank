@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'modir',
     'customer',
     'employee',
+    'client',
     'bank',
     'atm',
     'service',
