@@ -5,6 +5,7 @@ Please share with us if anything missed.
 Run following commands to run the project:
 
 ```bash
+$ ./manage.py migrate
 $ ./manage.py create_bank_admin
 $ ./manage.py create_bank
 $ ./manage.py runserver 0.0.0.0:8000
