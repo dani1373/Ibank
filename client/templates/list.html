@@ -16,7 +16,7 @@
             {% for cell in entity %}
               <td>
                 {% if cell.href %}
-                  <a class="btn btn-xs btn-primary" role="button" href="{{href}}">{{cell.label}}</a>
+                  <a class="btn btn-xs btn-primary" role="button" href="{{cell.href}}">{{cell.label}}</a>
                 {% else %}
                   {{ cell.label }}
                 {% endif %}

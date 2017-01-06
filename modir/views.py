@@ -25,20 +25,20 @@ def register_branch_admin(request):
     if request.method == 'GET':
         return client_form(request, data=data)
     if request.method == 'POST':
-        profile = Profile.register(request.POST)
+        try:
+            profile = Profile.register(request.POST)
 
-        if not profile:
+            if BranchAdmin.objects.filter(profile=profile).exists():
+                data['error'] = True
+                data['message'] = _('We have same admin branch with id %s and password %s' % (profile.national_id,
+                                                                                              profile.password))
+                return client_form(request, data=data)
+
+            branch_admin = BranchAdmin.objects.create(profile=profile)
+            data['success'] = True
+            data['message'] = _('profile with national id %s and password %s is upgraded to branch admin profile'
+                                % (branch_admin.profile.national_id, branch_admin.profile.password))
+            return client_form(request, data=data)
+        except:
             data['error'] = True
             return client_form(request, data=data)
-
-        if BranchAdmin.objects.filter(profile=profile).exists():
-            data['error'] = True
-            data['message'] = _('We have same admin branch with id %s and password %s' % (profile.national_id,
-                                                                                          profile.password))
-            return client_form(request, data=data)
-
-        branch_admin = BranchAdmin.objects.create(profile=profile)
-        data['success'] = True
-        data['message'] = _('profile with national id %s and password %s is upgraded to branch admin profile'
-                            % (branch_admin.profile.national_id, branch_admin.profile.password))
-        return client_form(request, data=data)

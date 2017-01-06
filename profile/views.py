@@ -32,7 +32,7 @@ def home_page(request, user):
         {'role': _('Lawyer'), 'name': _('Verify cheque'), 'href': '/'},
         {'role': _('Lawyer'), 'name': _('Verify loan'), 'href': '/'},
 
-        {'role': _('Cashier'), 'name': _('Create account'), 'href': '/customer/create_account'},
+        {'role': _('Cashier'), 'name': _('Create account'), 'href': '/customer/register_customer'},
         {'role': _('Cashier'), 'name': _('Create transaction'), 'href': '/'},
         {'role': _('Cashier'), 'name': _('Cheque creation request'), 'href': '/'},
         {'role': _('Cashier'), 'name': _('Cheque transaction'), 'href': '/'},

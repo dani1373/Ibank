@@ -9,7 +9,7 @@ def client_index(request, role, usecases):
     return render(request, 'index.html', {'role': role, 'usecases': usecases})
 
 
-def listh(request, data=None):
+def client_listh(request, data=None):
     if data is None:
         data = {
             'title': 'Branches',
@@ -28,7 +28,6 @@ def client_form(request, data=None):
     if data is None:
         data = {
             'title': 'Edit User',
-            'errors': ['Invalid name', 'You are so poor'],
             'fields': [
                 {'id': 'name', 'label': 'Name', 'value': 'Hamed', 'type': 'text'},
                 {'id': 'name', 'label': 'Name', 'value': 'Hamed', 'type': 'text'},
