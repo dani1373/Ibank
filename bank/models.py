@@ -7,7 +7,7 @@ from profile.models import Profile
 
 
 class Bank(models.Model):
-    admin = models.ForeignKey(BankAdmin)
+    admin = models.OneToOneField(BankAdmin)
 
     annual_profit = models.FloatField(default=0)
 
@@ -19,6 +19,6 @@ class Bank(models.Model):
 
 
 class Branch(models.Model):
-    admin = models.ForeignKey(BranchAdmin)
+    admin = models.OneToOneField(BranchAdmin)
 
     address = models.CharField(max_length=100, null=False, blank=False)

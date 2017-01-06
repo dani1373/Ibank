@@ -14,7 +14,7 @@ class Customer(models.Model):
         ('D', 'Disable'),
     )
 
-    profile = models.ForeignKey(Profile)
+    profile = models.OneToOneField(Profile)
 
     state = models.CharField(max_length=1, choices=STATE_CHOICES, default='W')
 
@@ -30,7 +30,7 @@ class Account(models.Model):
     branch = models.ForeignKey(Branch)
     creator = models.ForeignKey(Employee)
 
-    account_number = models.CharField(max_length=10, null=False, blank=False, db_index=True)
+    account_number = models.CharField(max_length=10, null=False, blank=False, db_index=True, unique=True)
     credit = models.PositiveIntegerField(default=0, db_index=True)
 
     state = models.CharField(max_length=1, choices=STATE_CHOICES, default='A')
