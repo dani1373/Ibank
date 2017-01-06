@@ -1,46 +1,29 @@
 {% extends "base.html" %} {% block content %}
 <div class="container">
-  <h1 class="page-header">شعب بانک</h1>
+  <h1 class="page-header">{{ title }}</h1>
   <div class="table-responsive">
     <table class="table table-striped">
       <thead>
         <tr>
-          <th>شماره شعبه</th>
-          <th>نام شعبه</th>
-          <th>آدرس شعبه</th>
-          <th>مدیر شعبه</th>
-          <th>اعمال</th>
+          {% for column in columns %}
+            <th>{{ column }}</th>
+          {% endfor %}
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
-          <td>سعادت آباد</td>
-          <td>سعادت آباد، میدان کاج</td>
-          <td>آقای علیزاده</td>
-          <td><a>ویرایش</a></td>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>سعادت آباد</td>
-          <td>سعادت آباد، میدان کاج</td>
-          <td>آقای علیزاده</td>
-          <td><a>ویرایش</a></td>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>سعادت آباد</td>
-          <td>سعادت آباد، میدان کاج</td>
-          <td>آقای علیزاده</td>
-          <td><a>ویرایش</a></td>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>سعادت آباد</td>
-          <td>سعادت آباد، میدان کاج</td>
-          <td>آقای علیزاده</td>
-          <td><a>ویرایش</a></td>
-        </tr>
+        {% for entity in entities %}
+          <tr>
+            {% for cell in entity %}
+              <td>
+                {% if cell.href %}
+                  <a class="btn btn-xs btn-primary" role="button" href="{{href}}">{{cell.label}}</a>
+                {% else %}
+                  {{ cell.label }}
+                {% endif %}
+              </td>
+            {% endfor %}
+          </tr>
+        {% endfor %}
       </tbody>
     </table>
   </div>

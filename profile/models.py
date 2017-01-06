@@ -24,21 +24,24 @@ class Profile(models.Model):
 
     @staticmethod
     def register(data):
-        first_name = data['first_name']
-        last_name = data['last_name']
-        national_id = data['national_id']
-        phone_number = data['phone_number']
-        address = data['address']
+        try:
+            first_name = data['first_name']
+            last_name = data['last_name']
+            national_id = data['national_id']
+            phone_number = data['phone_number']
+            address = data['address']
 
-        if Profile.objects.filter(national_id=national_id).exists():
-            return Profile.objects.get(national_id=national_id)
+            if Profile.objects.filter(national_id=national_id).exists():
+                return Profile.objects.get(national_id=national_id)
 
-        user = User.objects.create(first_name=first_name, last_name=last_name, username=national_id)
-        password = str(uuid.uuid4())[:6]
-        user.set_password(password)
-        user.save()
+            user = User.objects.create(first_name=first_name, last_name=last_name, username=national_id)
+            password = str(uuid.uuid4())[:6]
+            user.set_password(password)
+            user.save()
 
-        profile = Profile.objects.create(user=user, phone_number=phone_number, address=address, national_id=national_id,
-                                         password=password)
+            profile = Profile.objects.create(user=user, phone_number=phone_number, address=address, national_id=national_id,
+                                             password=password)
 
-        return profile
+            return profile
+        except:
+            return None

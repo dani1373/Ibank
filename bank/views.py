@@ -1,10 +1,11 @@
 import json
+from django.utils.translation import ugettext_lazy as _
 
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from django.shortcuts import render
 
 from bank.models import Bank, Branch
+from client.views import client_form
 from handlers import ValidateRole
 from modir.models import BranchAdmin
 
@@ -12,16 +13,30 @@ from modir.models import BranchAdmin
 @login_required
 @ValidateRole(['Bank Admin'])
 def define_annual_profit(request):
+    data = {
+        'title': _('Define annual profit'),
+        'fields': [
+            {'id': 'annual_profit', 'label': _('Profit'), 'value': Bank.objects.all()[0].annual_profit, 'type': 'text'},
+        ]
+    }
+
     if request.method == 'GET':
-        return HttpResponse('client view')
+        return client_form(request, data)
     if request.method == 'POST':
-        annual_profit = request.POST['annual_profit']
-        bank = Bank.objects.all()[0]
+        try:
+            annual_profit = request.POST['annual_profit']
+            bank = Bank.objects.all()[0]
 
-        bank.annual_profit = annual_profit
-        bank.save()
+            bank.annual_profit = annual_profit
+            bank.save()
 
-        return HttpResponse('Successfully updated to %s percent profit per year' % bank.annual_profit)
+            data['success'] = True
+            data['fields'][0]['value'] = bank.annual_profit
+
+            return client_form(request, data)
+        except:
+            data['error'] = True
+            return client_form(request, data)
 
 
 @login_required

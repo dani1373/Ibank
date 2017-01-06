@@ -2,16 +2,9 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render
 
-from bank.models import Branch
 from employee.models import Employee
 from handlers import ValidateRole
 from profile.models import Profile
-
-
-def employee_home_page(user):
-    employee = user.profile.employee
-
-    return HttpResponse(employee.get_type_display())
 
 
 @login_required
