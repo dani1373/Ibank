@@ -19,6 +19,6 @@ class Bank(models.Model):
 
 
 class Branch(models.Model):
-    admin = models.OneToOneField(BranchAdmin)
+    admin = models.OneToOneField(BranchAdmin, null=True)
 
     address = models.CharField(max_length=100, null=False, blank=False)

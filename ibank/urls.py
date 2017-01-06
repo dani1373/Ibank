@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 
+from profile.views import index
 
 urlpatterns = [
+    url(r'^$', index, name='index'),
     url(r'^bank/', include('bank.urls', namespace='bank')),
     url(r'^profile/', include('profile.urls', namespace='profile')),
     url(r'^customer/', include('customer.urls', namespace='customer')),

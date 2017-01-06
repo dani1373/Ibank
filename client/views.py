@@ -1,17 +1,37 @@
 from django.shortcuts import render
 
 
-def client_login(request):
-  return render(request, 'login.html')
+def client_login(request, error=False):
+    return render(request, 'login.html', {'error': error})
 
 
-def index(request):
-  return render(request, 'index.html')
+def client_index(request, role, usecases):
+    return render(request, 'index.html', {'role': role, 'usecases': usecases})
 
 
-def listh(request):
-  return render(request, 'list.html')
+def client_listh(request, data=None):
+    if data is None:
+        data = {
+            'title': 'Branches',
+            'columns': ['Name', 'Age', 'Action'],
+            'entities': [
+                [{'label': 'Hamed'}, {'label': '13'}, {'label': 'Edit', 'href': 'https://google.com'}],
+                [{'label': 'Hamed'}, {'label': '13'}, {'label': 'Edit', 'href': 'https://google.com'}],
+                [{'label': 'Hamed'}, {'label': '13'}, {'label': 'Edit', 'href': 'https://google.com'}],
+                [{'label': 'Hamed'}, {'label': '13'}, {'label': 'Edit', 'href': 'https://google.com'}],
+            ]
+        }
+    return render(request, 'list.html', data)
 
 
-def form(request):
-  return render(request, 'form.html')
+def client_form(request, data=None):
+    if data is None:
+        data = {
+            'title': 'Edit User',
+            'fields': [
+                {'id': 'name', 'label': 'Name', 'value': 'Hamed', 'type': 'text'},
+                {'id': 'name', 'label': 'Name', 'value': 'Hamed', 'type': 'text'},
+                {'id': 'name', 'label': 'Name', 'value': 'Hamed', 'type': 'text'},
+            ]
+        }
+    return render(request, 'form.html', data)

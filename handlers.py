@@ -1,6 +1,6 @@
 from functools import wraps
 
-from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 
 
 class ValidateRole(object):
@@ -10,9 +10,8 @@ class ValidateRole(object):
     def __call__(self, function):
         @wraps(function)
         def wrapped(request, *args, **kwargs):
-            print self.roles
             if request.user.profile.get_type() not in self.roles:
-                return HttpResponse('You are not allowed to do this operation.')
+                return HttpResponseRedirect('/')
             return function(request, *args, **kwargs)
 
         return wrapped

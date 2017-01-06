@@ -7,36 +7,18 @@
 </div>
 <div class="container">
   <div class="row">
+  {% for usecase in usecases %}
+    {% if role == usecase.role %}
     <div class="col-xs-6 col-lg-4">
-      <h2>کارت به کارت</h2>
-      <p>می‌توانید پول خود را از کارتتان به کارت دوستتان بریزید.</p>
-      <p><a class="btn btn-default" href="/list" role="button">انجام &raquo;</a></p>
+      <div class="thumbnail">
+        <div class="caption">
+          <h3>{{ usecase.name }}</h3>
+          <p><a class="btn btn-primary" href="{{ usecase.href }}" role="button">انجام &raquo;</a></p>
+        </div>
+      </div>
     </div>
-    <div class="col-xs-6 col-lg-4">
-      <h2>کارت به کارت</h2>
-      <p>می‌توانید پول خود را از کارتتان به کارت دوستتان بریزید.</p>
-      <p><a class="btn btn-default" href="#" role="button">انجام &raquo;</a></p>
-    </div>
-    <div class="col-xs-6 col-lg-4">
-      <h2>کارت به کارت</h2>
-      <p>می‌توانید پول خود را از کارتتان به کارت دوستتان بریزید.</p>
-      <p><a class="btn btn-default" href="#" role="button">انجام &raquo;</a></p>
-    </div>
-    <div class="col-xs-6 col-lg-4">
-      <h2>کارت به کارت</h2>
-      <p>می‌توانید پول خود را از کارتتان به کارت دوستتان بریزید.</p>
-      <p><a class="btn btn-default" href="#" role="button">انجام &raquo;</a></p>
-    </div>
-    <div class="col-xs-6 col-lg-4">
-      <h2>کارت به کارت</h2>
-      <p>می‌توانید پول خود را از کارتتان به کارت دوستتان بریزید.</p>
-      <p><a class="btn btn-default" href="#" role="button">انجام &raquo;</a></p>
-    </div>
-    <div class="col-xs-6 col-lg-4">
-      <h2>کارت به کارت</h2>
-      <p>می‌توانید پول خود را از کارتتان به کارت دوستتان بریزید.</p>
-      <p><a class="btn btn-default" href="#" role="button">انجام &raquo;</a></p>
-    </div>
+    {% endif %}
+  {% endfor %}
   </div>
 </div>
 <!-- /container -->
