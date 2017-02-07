@@ -14,6 +14,7 @@ class Command(BaseCommand):
             'national_id': '1234567890',
             'phone_number': '09123456789',
             'address': 'Iran - Tehran - Ibank',
+            'email': 'sadfall95ibank@gmail.com'
         }
 
         BankAdmin.objects.all().delete()

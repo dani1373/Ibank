@@ -29,11 +29,12 @@ class Profile(models.Model):
         national_id = data['national_id']
         phone_number = data['phone_number']
         address = data['address']
+        email = data['email']
 
         if Profile.objects.filter(national_id=national_id).exists():
             return Profile.objects.get(national_id=national_id)
 
-        user = User.objects.create(first_name=first_name, last_name=last_name, username=national_id)
+        user = User.objects.create(first_name=first_name, last_name=last_name, username=national_id, email=email)
         password = str(uuid.uuid4())[:6]
         user.set_password(password)
         user.save()

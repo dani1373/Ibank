@@ -22,6 +22,7 @@ def register_customer(request):
             {'id': 'national_id', 'label': _('national id'), 'value': '', 'type': 'text'},
             {'id': 'phone_number', 'label': _('phone number'), 'value': '', 'type': 'text'},
             {'id': 'address', 'label': _('address'), 'value': '', 'type': 'text'},
+            {'id': 'email', 'label': _('Email'), 'value': '', 'type': 'text'},
         ]
     }
 

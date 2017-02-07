@@ -2,10 +2,11 @@ from django.utils.translation import ugettext_lazy as _
 
 from django.contrib.auth.decorators import login_required
 
-from client.views import client_form
+from client.views import client_form, client_listh
 from handlers import ValidateRole
 from modir.models import BranchAdmin
 from profile.models import Profile
+from service.models import Loan
 
 
 @login_required
@@ -19,6 +20,7 @@ def register_branch_admin(request):
             {'id': 'national_id', 'label': _('national id'), 'value': '', 'type': 'text'},
             {'id': 'phone_number', 'label': _('phone number'), 'value': '', 'type': 'text'},
             {'id': 'address', 'label': _('address'), 'value': '', 'type': 'text'},
+            {'id': 'email', 'label': _('email'), 'value': '', 'type': 'text'},
         ]
     }
 
@@ -42,3 +44,20 @@ def register_branch_admin(request):
         except:
             data['error'] = True
             return client_form(request, data=data)
+
+
+@login_required
+@ValidateRole(['Bank Admin', 'Branch Admin'])
+def loan_report(request):
+    data = {
+        'title': _('Loan Report'),
+        'columns': [_('Account'), _('Loan Amount'), _('Benfit Amount')],
+        'entities': []
+    }
+
+    if request.method == 'GET':
+        for loan in Loan.objects.all():
+            data['entities'].append([{'label': loan.account.account_number},
+                                     {'label': loan.amount},
+                                     {'label': loan.periodicorder_set.all()[0].amount - loan.amount}])
+        return client_listh(request, data=data)

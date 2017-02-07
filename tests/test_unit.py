@@ -15,6 +15,7 @@ class SampleTest(unittest.TestCase):
         data['national_id'] = '1234567890'
         data['phone_number'] = '0912345678'
         data['address'] = 'hichja'
+        data['email'] = 'sadfall95ibank@gmail.com'
 
         profile = Profile.register(data=data)
         profile.user.set_password('123456')

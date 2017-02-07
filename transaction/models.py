@@ -4,6 +4,7 @@ from django.db import models
 
 from atm.models import ATM
 from customer.models import Account
+from employee.models import Employee
 from service.models import Cheque, PeriodicOrder, Bill
 
 
@@ -29,6 +30,8 @@ class Transaction(models.Model):
     atm = models.ForeignKey(ATM, null=True)
     periodic_order = models.ForeignKey(PeriodicOrder, null=True)
     bill = models.ForeignKey(Bill, null=True)
+
+    employee = models.ForeignKey(Employee, null=True)
 
     amount = models.PositiveIntegerField()
 
