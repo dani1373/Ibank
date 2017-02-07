@@ -723,8 +723,10 @@ def periodic_order_resolver():
             if datetime.now().date() == time_to_run:
                 amount = periodic_order.amount / periodic_order.count
                 if periodic_order.source_account.credit < amount:
-                    pass
-                    # TODO Notify account and admins
+                    sendMail(title='IBank Not Enough Money',
+                             message='Your account %s has not enough money for your periodic order' %
+                                     periodic_order.source_account.account_number,
+                             to=periodic_order.source_account.customer.profile.user.email)
                 else:
                     transaction = Transaction.objects.create(source_account=periodic_order.source_account,
                                                              destination_account=periodic_order.destination_account,

@@ -254,3 +254,20 @@ def profile_report(request):
         except:
             data['error'] = True
             return client_form(request, data=data)
+
+
+def notify_customer():
+    now = datetime.now()
+    from_time = datetime(now.year, now.month, now.day, now.hour, now.minute)
+
+    for transaction in Transaction.objects.filter(create_time__gte=from_time):
+        if transaction.destination_account:
+            sendMail(title='Ibank Withdraw', message='We took %s amount from your bank account %s' %
+                                                     (transaction.amount,
+                                                      transaction.destination_account.account_number),
+                     to=transaction.destination_account.customer.profile.user.email)
+        if transaction.source_account:
+            sendMail(title='Ibank Deposit', message='We add %s amount to your bank account %s' %
+                                                    (transaction.amount,
+                                                     transaction.source_account.account_number),
+                     to=transaction.destination_account.customer.profile.user.email)

@@ -7,6 +7,7 @@ from atm.models import ATM, Money, ATMMoney, AddMoney, Card
 from bank.models import Bank
 from client.views import client_form
 from customer.models import Account
+from employee.models import Employee
 from handlers import ValidateRole
 from transaction.models import Transaction
 
@@ -346,8 +347,13 @@ def atm_transaction(request):
                 for atm_money in ATMMoney.objects.filter(atm__id=atm_id):
                     atm_total_money += atm_money.money.amount * atm_money.count
                 if atm_total_money < atm.minimum:
-                    pass
-                    # TODO Notify atm master
+                    try:
+                        atm_master = Employee.objects.filter(branch=atm.branch, type='T')[0]
+                        sendMail(title='Ibank atm less than minimum',
+                                 message='Atm with id %s has less money than expected minimum amount' % atm.id,
+                                 to=atm_master.profile.user.email)
+                    except:
+                        print 'We dont have atm master for branch %s!!!' % atm.branch.id
 
             data['success'] = True
             return client_form(request, data=data)
