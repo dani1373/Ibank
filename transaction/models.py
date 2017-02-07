@@ -22,13 +22,13 @@ class Transaction(models.Model):
         ('H', 'Physical'),
     )
 
-    source_account = models.ForeignKey(Account, related_name='source')
-    destination_account = models.ForeignKey(Account, related_name='destination')
+    source_account = models.ForeignKey(Account, null=True, related_name='source')
+    destination_account = models.ForeignKey(Account, null=True, related_name='destination')
 
-    cheque = models.ForeignKey(Cheque)
-    atm = models.ForeignKey(ATM)
-    periodic_order = models.ForeignKey(PeriodicOrder)
-    bill = models.ForeignKey(Bill)
+    cheque = models.ForeignKey(Cheque, null=True)
+    atm = models.ForeignKey(ATM, null=True)
+    periodic_order = models.ForeignKey(PeriodicOrder, null=True)
+    bill = models.ForeignKey(Bill, null=True)
 
     amount = models.PositiveIntegerField()
 

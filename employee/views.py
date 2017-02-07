@@ -1,8 +1,9 @@
+from django.http import HttpResponseRedirect
 from django.utils.translation import ugettext_lazy as _
 
 from django.contrib.auth.decorators import login_required
 
-from client.views import client_form
+from client.views import client_form, client_listh
 from employee.models import Employee
 from handlers import ValidateRole
 from profile.models import Profile
@@ -49,3 +50,79 @@ def register_employee(request):
         except:
             data['error'] = True
             return client_form(request, data=data)
+
+
+@login_required
+@ValidateRole(['Branch Admin'])
+def assign_role(request):
+    data = {
+        'title': _('Assign Role'),
+        'columns': [_('Id'), _('Role')],
+        'entities': []
+    }
+
+    if request.method == 'GET':
+        for employee in Employee.objects.all():
+            if employee.branch.admin == request.user.profile.branchadmin:
+                current_role = _(employee.get_type_display())
+                data['entities'].append([{'label': employee.profile.national_id}, {'label': current_role},
+                                         {'label': _('Edit'), 'href': '/employee/assign_role/%s'
+                                                                      % employee.profile.national_id}])
+        return client_listh(request, data=data)
+
+
+@login_required
+@ValidateRole(['Branch Admin'])
+def assign_role_employee(request, national_id):
+    data = {
+        'title': _('Assign Role to Employee {}').format(national_id),
+        'columns': [_('Role')],
+        'entities': []
+    }
+
+    translated_roles = [_('Lawyer'), _('Cashier'), _('Auditor'), _('ATM Master')]
+    roles = ['Lawyer', 'Cashier', 'Auditor', 'ATM_Master']
+    if request.method == 'GET':
+        for id, role in enumerate(roles):
+            data['entities'].append([{'label': translated_roles[id]}, {'label': _('Assign'),
+                                                                       'href': '/employee/assign_role/%s/%s'
+                                                                               % (national_id, role)}])
+        return client_listh(request, data=data)
+
+
+@login_required
+@ValidateRole(['Branch Admin'])
+def assign_role_employee_national(request, national_id, role):
+    data = {
+        'title': _('Assign Role'),
+        'fields': []
+    }
+
+    if request.method == 'GET':
+        roles = ['Lawyer', 'Cashier', 'Auditor', 'ATM_Master']
+        types = {
+            'Lawyer': 'L',
+            'Cashier': 'C',
+            'Auditor': 'A',
+            'ATM_Master': 'T',
+        }
+
+        if role not in roles:
+            data['error'] = True
+            data['message'] = _('Invalid role')
+            return client_form(request, data)
+
+        if not Employee.objects.filter(profile__national_id=national_id).exists():
+            data['error'] = True
+            data['message'] = _('No employee with {} national id').format(national_id)
+            return client_form(request, data=data)
+
+        employee = Employee.objects.get(profile__national_id=national_id)
+        employee.type = types[role]
+        employee.save()
+
+        data['success'] = True
+        data['message'] = _('role updated for employee with national id {} ').format(national_id)
+        return client_form(request, data)
+    if request.method == 'POST':
+        return HttpResponseRedirect('/employee/assign_role')

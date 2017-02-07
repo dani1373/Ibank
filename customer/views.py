@@ -5,7 +5,7 @@ import random
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 
-from client.views import client_form
+from client.views import client_form, client_listh
 from customer.models import Customer, Account
 from handlers import ValidateRole
 from profile.models import Profile
@@ -126,3 +126,62 @@ def disable_account(request):
         except:
             data['error'] = True
             return client_form(request, data=data)
+
+
+@login_required
+@ValidateRole(['Lawyer'])
+def verify_customer(request):
+    data = {
+        'title': _('Verify Customer'),
+        'columns': [_('Id'), _('Name'), _('Phone number'), _('Address')],
+        'entities': []
+    }
+
+    if request.method == 'GET':
+        for customer in Customer.objects.filter(state='W'):
+            data['entities'].append([{'label': customer.profile.national_id},
+                                     {'label': '%s %s' % (customer.profile.user.first_name,
+                                                          customer.profile.user.last_name)},
+                                     {'label': customer.profile.phone_number},
+                                     {'label': customer.profile.address},
+                                     {'label': _('Accept'), 'href': '/customer/verify_customer/%s/accept'
+                                                                    % customer.profile.national_id},
+                                     {'label': _('Reject'), 'href': '/customer/verify_customer/%s/reject'
+                                                                    % customer.profile.national_id}])
+        return client_listh(request, data=data)
+
+
+@login_required
+@ValidateRole(['Lawyer'])
+def verify_customer_state(request, national_id, state):
+    data = {
+        'title': _('Verify Customer'),
+        'fields': []
+    }
+
+    if request.method == 'GET':
+        states = ['accept', 'reject']
+
+        if state not in states:
+            data['error'] = True
+            data['message'] = _('Invalid state')
+            return client_form(request, data)
+
+        if not Customer.objects.filter(profile__national_id=national_id).exists():
+            data['error'] = True
+            data['message'] = _('No customer with {} national id').format(national_id)
+            return client_form(request, data=data)
+
+        customer = Customer.objects.get(profile__national_id=national_id)
+
+        if state == 'accept':
+            customer.state = 'A'
+        else:
+            customer.state = 'D'
+        customer.save()
+
+        data['success'] = True
+        data['message'] = _('Customer with national id {} state updated').format(national_id)
+        return client_form(request, data)
+    if request.method == 'POST':
+        return HttpResponseRedirect('/customer/verify_customer')
