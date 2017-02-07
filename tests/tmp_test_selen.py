@@ -26,7 +26,7 @@ class PythonOrgSearch(unittest.TestCase):
         elem = driver.find_element_by_name('password')
         elem.send_keys('123456')
         elem.send_keys(Keys.ENTER)
-        elem = driver.find_element_by_xpath("//a[@href='/bank/define_annual_profit']");
+        elem = driver.find_element_by_xpath("//a[@href='/bank/define_annual_profit']")
         elem.click()
         elem = driver.find_element_by_name("annual_profit")
         elem.send_keys('20')

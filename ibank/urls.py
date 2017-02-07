@@ -26,5 +26,5 @@ urlpatterns = [
     url(r'^employee/', include('employee.urls', namespace='employee')),
     url(r'^modir/', include('modir.urls', namespace='modir')),
     url(r'^service/', include('service.urls', namespace='service')),
-    # url(r'^transaction/', include('transaction.urls', namespace='transaction')),
+    url(r'^transaction/', include('transaction.urls', namespace='transaction')),
 ]

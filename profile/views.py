@@ -20,7 +20,7 @@ def home_page(request, user):
         {'role': 'Bank Admin', 'name': _('Loan report'), 'href': '/'},
 
         {'role': 'Branch Admin', 'name': _('Create employee account'), 'href': '/employee/register_employee'},
-        {'role': 'Branch Admin', 'name': _('Assign role'), 'href': '/'},
+        {'role': 'Branch Admin', 'name': _('Assign role'), 'href': '/employee/assign_role'},
         {'role': 'Branch Admin', 'name': _('Define money'), 'href': '/'},
         {'role': 'Branch Admin', 'name': _('Define atm'), 'href': '/'},
         {'role': 'Branch Admin', 'name': _('Define minimum amount for atm'), 'href': '/'},
@@ -28,12 +28,12 @@ def home_page(request, user):
         {'role': 'Branch Admin', 'name': _('Loan report'), 'href': '/'},
 
         {'role': 'Lawyer', 'name': _('Disable account'), 'href': '/customer/disable_account'},
-        {'role': 'Lawyer', 'name': _('Verify customer information'), 'href': '/'},
+        {'role': 'Lawyer', 'name': _('Verify customer information'), 'href': '/customer/verify_customer'},
         {'role': 'Lawyer', 'name': _('Verify cheque'), 'href': '/'},
         {'role': 'Lawyer', 'name': _('Verify loan'), 'href': '/'},
 
         {'role': 'Cashier', 'name': _('Create account'), 'href': '/customer/register_customer'},
-        {'role': 'Cashier', 'name': _('Create transaction'), 'href': '/'},
+        {'role': 'Cashier', 'name': _('Create transaction'), 'href': '/transaction/create_transaction'},
         {'role': 'Cashier', 'name': _('Cheque creation request'), 'href': '/'},
         {'role': 'Cashier', 'name': _('Cheque transaction'), 'href': '/'},
         {'role': 'Cashier', 'name': _('Bill transaction'), 'href': '/'},
