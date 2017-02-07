@@ -1,3 +1,4 @@
+from datetime import timedelta, datetime
 from django.http import HttpResponseRedirect
 from django.utils.translation import ugettext_lazy as _
 
@@ -698,3 +699,41 @@ def auditor_loan(request, loan_id, state):
         return client_form(request, data)
     if request.method == 'POST':
         return HttpResponseRedirect('/service/verify_auditor_loan')
+
+
+def periodic_order_resolver():
+    for periodic_order in PeriodicOrder.objects.filter(state='I'):
+        ran_till_now = Transaction.objects.filter(periodic_order=periodic_order).count()
+        if ran_till_now == periodic_order.count:
+            periodic_order.state = 'D'
+            periodic_order.save()
+            if periodic_order.loan:
+                periodic_order.loan.state = 'D'
+                periodic_order.loan.save()
+        else:
+            if periodic_order.type == 'D':
+                time_to_run = periodic_order.start_time + timedelta(days=1+ran_till_now)
+            elif periodic_order.type == 'W':
+                time_to_run = periodic_order.start_time + timedelta(days=7*(1+ran_till_now))
+            elif periodic_order.type == 'M':
+                time_to_run = periodic_order.start_time + timedelta(days=30*(1+ran_till_now))
+            elif periodic_order.type == 'Y':
+                time_to_run = periodic_order.start_time + timedelta(days=365*(1+ran_till_now))
+
+            if datetime.now().date() == time_to_run:
+                amount = periodic_order.amount / periodic_order.count
+                if periodic_order.source_account.credit < amount:
+                    pass
+                    # TODO Notify account and admins
+                else:
+                    transaction = Transaction.objects.create(source_account=periodic_order.source_account,
+                                                             destination_account=periodic_order.destination_account,
+                                                             amount=amount,
+                                                             periodic_order=periodic_order,
+                                                             type='T',
+                                                             method='P')
+                    transaction.source_account.credit -= amount
+                    transaction.destination_account.credit += amount
+
+                    transaction.source_account.save()
+                    transaction.destination_account.save()
