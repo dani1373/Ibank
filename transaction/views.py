@@ -1,6 +1,8 @@
 from datetime import datetime, timedelta
 
 import tablib
+from reportlab.platypus import Table, SimpleDocTemplate
+
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
@@ -221,7 +223,7 @@ def profile_report(request):
 
             view_transactions = []
             for transaction in transactions:
-                view_transactions.append((str(transaction.create_time), transaction.source_account.account_number if
+                view_transactions.append((str(transaction.create_time.ctime()), transaction.source_account.account_number if
                 transaction.source_account else '', transaction.destination_account.account_number if
                 transaction.destination_account else '', transaction.amount))
 
@@ -233,11 +235,17 @@ def profile_report(request):
                 response['Content-Disposition'] = 'attachment; filename=%s.xls' % account.account_number
                 return response
             if request.POST['type'] == 'PDF':
-                data = tablib.Dataset(*view_transactions, headers=['Create Time', 'Source Account Number',
-                                                                   'Destination Account Number', 'Amount'])
-                
-                response = HttpResponse(data.xls, content_type="application/ms-excel")
-                response['Content-Disposition'] = 'attachment; filename=%s.xls' % account.account_number
+                response = HttpResponse(content_type="application/pdf")
+                response['Content-Disposition'] = 'attachment; filename=%s.pdf' % account.account_number
+
+                doc = SimpleDocTemplate(response, rightMargin=0, leftMargin=6.5 * 2.54, topMargin=0.3 * 2.54,
+                                        bottomMargin=0)
+
+                data_list = [['Create Time', 'Source Account Number', 'Destination Account Number', 'Amount']
+                             ] + view_transactions
+                data = Table(data_list)
+
+                doc.build([data])
                 return response
 
             data['error'] = True
