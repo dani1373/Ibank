@@ -25,10 +25,10 @@ class Account(models.Model):
         ('D', 'Disable'),
     )
 
-    customer = models.ForeignKey(Customer)
+    customer = models.ForeignKey(Customer, null=True)
 
-    branch = models.ForeignKey(Branch)
-    creator = models.ForeignKey(Employee)
+    branch = models.ForeignKey(Branch, null=True)
+    creator = models.ForeignKey(Employee, null=True)
 
     account_number = models.CharField(max_length=10, null=False, blank=False, db_index=True, unique=True)
     credit = models.PositiveIntegerField(default=0, db_index=True)

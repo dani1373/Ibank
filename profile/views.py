@@ -16,7 +16,7 @@ def home_page(request, user):
         {'role': 'Bank Admin', 'name': _('Assign admin to branch'), 'href': '/bank/assign_admin'},
         {'role': 'Bank Admin', 'name': _('Get admin report'), 'href': '/'},
         {'role': 'Bank Admin', 'name': _('Create bill'), 'href': '/service/define_bill'},
-        {'role': 'Bank Admin', 'name': _('Transaction commission'), 'href': '/'},
+        {'role': 'Bank Admin', 'name': _('Transaction commission'), 'href': '/bank/transaction_commission'},
         {'role': 'Bank Admin', 'name': _('Loan report'), 'href': '/'},
 
         {'role': 'Branch Admin', 'name': _('Create employee account'), 'href': '/employee/register_employee'},
@@ -29,20 +29,20 @@ def home_page(request, user):
 
         {'role': 'Lawyer', 'name': _('Disable account'), 'href': '/customer/disable_account'},
         {'role': 'Lawyer', 'name': _('Verify customer information'), 'href': '/customer/verify_customer'},
-        {'role': 'Lawyer', 'name': _('Verify cheque'), 'href': '/'},
-        {'role': 'Lawyer', 'name': _('Verify loan'), 'href': '/'},
+        {'role': 'Lawyer', 'name': _('Verify cheque'), 'href': '/service/verify_lawyer_cheque'},
+        {'role': 'Lawyer', 'name': _('Verify loan'), 'href': '/service/verify_lawyer_loan'},
 
         {'role': 'Cashier', 'name': _('Create account'), 'href': '/customer/register_customer'},
         {'role': 'Cashier', 'name': _('Create transaction'), 'href': '/transaction/create_transaction'},
-        {'role': 'Cashier', 'name': _('Cheque creation request'), 'href': '/'},
-        {'role': 'Cashier', 'name': _('Cheque transaction'), 'href': '/'},
-        {'role': 'Cashier', 'name': _('Bill transaction'), 'href': '/'},
+        {'role': 'Cashier', 'name': _('Cheque creation request'), 'href': '/service/create_cheque_book'},
+        {'role': 'Cashier', 'name': _('Cheque transaction'), 'href': '/service/cheque_transaction'},
+        {'role': 'Cashier', 'name': _('Bill transaction'), 'href': '/service/pay_bill'},
         {'role': 'Cashier', 'name': _('Profile transaction report'), 'href': '/'},
-        {'role': 'Cashier', 'name': _('Periodic order creation'), 'href': '/'},
-        {'role': 'Cashier', 'name': _('Loan request'), 'href': '/'},
+        {'role': 'Cashier', 'name': _('Periodic order creation'), 'href': '/service/create_perodic_order'},
+        {'role': 'Cashier', 'name': _('Loan request'), 'href': '/service/loan_request'},
 
-        {'role': 'Auditor', 'name': _('Verify cheque'), 'href': '/'},
-        {'role': 'Auditor', 'name': _('Verify loan'), 'href': '/'},
+        {'role': 'Auditor', 'name': _('Verify cheque'), 'href': '/service/verify_auditor_cheque'},
+        {'role': 'Auditor', 'name': _('Verify loan'), 'href': '/service/verify_auditor_loan'},
         {'role': 'Auditor', 'name': _('Auditor report'), 'href': '/'},
 
         {'role': 'ATM Master', 'name': _('Put money in atm'), 'href': '/'},

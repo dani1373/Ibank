@@ -30,14 +30,14 @@ class Cheque(models.Model):
 class BillType(models.Model):
     destination_account = models.ForeignKey(Account)
 
-    name = models.CharField(max_length=100, null=False, blank=False, db_index=True)
+    name = models.CharField(max_length=100, unique=True, null=False, blank=False, db_index=True)
 
 
 class Bill(models.Model):
     bill_type = models.ForeignKey(BillType)
 
     amount = models.PositiveIntegerField(null=False, blank=False, db_index=True)
-    payer = models.CharField(max_length=10, null=False, blank=False, db_index=True)  # national id of payer
+    owner = models.CharField(max_length=10, null=False, blank=False, db_index=True)  # national id of payer
 
 
 class Loan(models.Model):
@@ -71,9 +71,12 @@ class PeriodicOrder(models.Model):
         ('D', 'Done'),
     )
 
-    loan = models.ForeignKey(Loan)
+    loan = models.ForeignKey(Loan, null=True)
 
-    start_time = models.DateField(null=False, blank=False, db_index=True)
+    source_account = models.ForeignKey(Account, related_name='source_periodic')
+    destination_account = models.ForeignKey(Account, related_name='destination_periodic')
+
+    start_time = models.DateField(auto_now_add=True)
     count = models.PositiveIntegerField(null=False, blank=False, db_index=True)
     amount = models.PositiveIntegerField(null=False, blank=False, db_index=True)
 

@@ -143,3 +143,34 @@ def assign_admin_branch_national(request, branch_id, national_id):
         return client_form(request, data)
     if request.method == 'POST':
         return HttpResponseRedirect('/bank/assign_admin')
+
+
+@login_required
+@ValidateRole(['Bank Admin'])
+def transaction_commission(request):
+    data = {
+        'title': _('Define transaction commission'),
+        'fields': [
+            {'id': 'commission', 'label': _('Transaction Commission'),
+             'value': Bank.objects.all()[0].transfer_commission,
+             'type': 'text'},
+        ]
+    }
+
+    if request.method == 'GET':
+        return client_form(request, data)
+    if request.method == 'POST':
+        try:
+            commission = request.POST['commission']
+            bank = Bank.objects.all()[0]
+
+            bank.transfer_commission = commission
+            bank.save()
+
+            data['success'] = True
+            data['fields'][0]['value'] = bank.transfer_commission
+
+            return client_form(request, data)
+        except:
+            data['error'] = True
+            return client_form(request, data)

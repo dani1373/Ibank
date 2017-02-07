@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import ugettext_lazy as _
 
+from bank.models import Bank
 from client.views import client_form
 from customer.models import Account
 from handlers import ValidateRole
@@ -55,6 +56,10 @@ def create_transaction(request):
             destination_account = None
             source_account = None
 
+            transaction_commission = 0
+            if destination_account_number and source_account_number:
+                transaction_commission = Bank.objects.all()[0].transfer_commission
+
             if destination_account_number:
                 destination_account = Account.objects.get(account_number=destination_account_number)
                 if destination_account.state == 'D':
@@ -71,12 +76,12 @@ def create_transaction(request):
                     data['error'] = True
                     data['message'] = _('Account with number {} is disabled').format(source_account_number)
                     return client_form(request, data=data)
-                if amount > source_account.credit:
+                if amount + transaction_commission > source_account.credit:
                     data['error'] = True
                     data['message'] = _('Your account has not enough credit')
                     return client_form(request, data=data)
 
-                source_account.credit -= amount
+                source_account.credit -= amount + transaction_commission
                 source_account.save()
 
             transaction_type = 'T'
@@ -88,6 +93,13 @@ def create_transaction(request):
             transaction = Transaction(source_account=source_account, destination_account=destination_account,
                                       amount=amount, type=transaction_type, method='H')
             transaction.save()
+
+            if transaction.type == 'T':
+                bank_account = Account.objects.get(account_number=1)
+                Transaction.objects.create(amount=transaction_commission, destination_account=bank_account, method='H',
+                                           type='D', source_account=source_account)
+                bank_account.credit += transaction_commission
+                bank_account.save()
             data['success'] = True
             return client_form(request, data=data)
         except:
