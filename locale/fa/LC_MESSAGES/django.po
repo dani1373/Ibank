@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-07 22:22+0000\n"
+"POT-Creation-Date: 2017-02-07 22:50+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,8 +19,6 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: atm/views.py:18
-#, fuzzy
-#| msgid "Define atm"
 msgid "Define ATM"
 msgstr "تعریف دستگاه‌خود‌پرداز"
 
@@ -43,11 +41,10 @@ msgstr "شما به هیچ شعبه‌ای اختصاص ندارید"
 
 #: atm/views.py:55
 msgid "We created {} ATM for branch with id {}. ATM id's are {}"
-msgstr "تعداد {} خودپرداز برای شعبه‌ی {} ساخته‌شد. شناسه‌ی این خودپرداز‌ها برابرند با {}"
+msgstr ""
+"تعداد {} خودپرداز برای شعبه‌ی {} ساخته‌شد. شناسه‌ی این خودپرداز‌ها برابرند با {}"
 
 #: atm/views.py:67
-#, fuzzy
-#| msgid "Define money"
 msgid "Define Money"
 msgstr "تعریف اسکناس"
 
@@ -59,17 +56,14 @@ msgid "Amount"
 msgstr "مقدار نقدی"
 
 #: atm/views.py:81
-#| msgid "There is no account with account number {}"
 msgid "There is money with amount {}"
 msgstr "پول با مبلغ {} قبلا تعریف شده‌است"
 
 #: atm/views.py:89
-#| msgid "A branch created with id {}"
 msgid "Money created with amount {}"
 msgstr "پول به مبلغ {} ساخته‌شد"
 
 #: atm/views.py:101
-#| msgid "Define minimum amount for atm"
 msgid "Define Minimum Money for ATM"
 msgstr "حداقل وجه نقد دستگاه‌خود‌پرداز"
 
@@ -78,14 +72,10 @@ msgid "ATM Id"
 msgstr "شناسه‌ی خودپرداز"
 
 #: atm/views.py:117
-#, fuzzy
-#| msgid "Amount should not be less than 10,000"
 msgid "amount should be greater that 0"
 msgstr "مبلغ باید بیشتر از صفر باشد"
 
 #: atm/views.py:122 atm/views.py:170 atm/views.py:276
-#, fuzzy
-#| msgid "There is no account with account number {}"
 msgid "There is no atm with id {}"
 msgstr "خودپردازی با شناسه‌ی {} وجود ندارد"
 
@@ -98,14 +88,10 @@ msgid "Minimum amount for atm with id {} is updated to {}"
 msgstr "حداقل مبلغ برای دستگاه خودپرداز با شناسه‌ی {} به {} به روزرسانی شد"
 
 #: atm/views.py:147
-#, fuzzy
-#| msgid "Assign money to atm"
 msgid "Assign Money to ATM"
 msgstr "تخصیص اسکناس به دستگاه‌خود‌پرداز"
 
 #: atm/views.py:165
-#, fuzzy
-#| msgid "There is no account with account number {}"
 msgid "There is no money with amount {}"
 msgstr "هیچ پولی با مقدار {} وجود ندارد"
 
@@ -114,8 +100,6 @@ msgid "Total {} money with amount {} is assigned to atm with id {}"
 msgstr "تعداد {} پول به مبلغ {} به دستگاه خودپرداز با شناسه‌ی {} داده‌شد"
 
 #: atm/views.py:200
-#, fuzzy
-#| msgid "Create account"
 msgid "Create card for account"
 msgstr "ساخت کارت برای حساب"
 
@@ -128,8 +112,6 @@ msgstr "شماره‌ی حساب"
 #: atm/views.py:214 atm/views.py:271 service/views.py:138 service/views.py:363
 #: service/views.py:460 service/views.py:465 service/views.py:549
 #: transaction/views.py:45 transaction/views.py:50 transaction/views.py:208
-#, fuzzy
-#| msgid "There is no account with account number {}"
 msgid "There is no account with number {}"
 msgstr "هیچ حسابی با شماره‌ي حساب {} وجود ندارد"
 
@@ -145,8 +127,6 @@ msgid "A card created for account number {} with card number {} and pin {}"
 msgstr "یک کارت برای شماره‌ی حساب {} با شماره‌ي کارت {} و رمز {} ساخته‌شد"
 
 #: atm/views.py:239
-#, fuzzy
-#| msgid "ATM transaction"
 msgid "ATM Transaction"
 msgstr "تراکنش دستگاه‌خود‌پرداز"
 
@@ -159,15 +139,11 @@ msgid "PIN"
 msgstr "رمز"
 
 #: atm/views.py:245 transaction/views.py:161
-#, fuzzy
-#| msgid "Disable Account"
 msgid "Destination Account"
 msgstr "حساب مقصد"
 
 #: atm/views.py:262 service/views.py:145 service/views.py:354
 #: service/views.py:435 service/views.py:524 transaction/views.py:57
-#, fuzzy
-#| msgid "Amount should not be less than 10,000"
 msgid "Amount should be greater than 0"
 msgstr "مبلغ باید بیشتر از صفر باشد"
 
@@ -254,14 +230,10 @@ msgid "branch {} admin updated to {} {}"
 msgstr "مدیر شعبه با شناسه‌ی {} به {} {} تخصیص یافت"
 
 #: bank/views.py:152
-#, fuzzy
-#| msgid "Transaction commission"
 msgid "Define transaction commission"
 msgstr "تایین هزینه‌ی تراکنش"
 
 #: bank/views.py:154
-#, fuzzy
-#| msgid "Transaction commission"
 msgid "Transaction Commission"
 msgstr "هزینه‌ی تراکنش"
 
@@ -325,14 +297,10 @@ msgid "There is no account with account number {}"
 msgstr "هیچ حسابی با شماره‌ي حساب {} وجود ندارد"
 
 #: customer/views.py:136 customer/views.py:159
-#, fuzzy
-#| msgid "Customer"
 msgid "Verify Customer"
 msgstr "تایید کاربر"
 
 #: customer/views.py:137
-#, fuzzy
-#| msgid "phone number"
 msgid "Phone number"
 msgstr "شماره‌ی تلفن"
 
@@ -352,8 +320,6 @@ msgid "Invalid state"
 msgstr "وضعیت نادرست"
 
 #: customer/views.py:173
-#, fuzzy
-#| msgid "No branch admin with {} national id"
 msgid "No customer with {} national id"
 msgstr "هیچ مشتری‌ای با شماره‌ي ملی {} موجود نیست"
 
@@ -379,8 +345,6 @@ msgid ""
 msgstr "کارمند با شماره‌ی ملی {} و رمز {} برای شعبه به شماره‌ی {} ساخته‌شد"
 
 #: employee/views.py:60 employee/views.py:98
-#, fuzzy
-#| msgid "Assign role"
 msgid "Assign Role"
 msgstr "تخصیص نقش"
 
@@ -389,8 +353,6 @@ msgid "Role"
 msgstr "نقش"
 
 #: employee/views.py:79
-#, fuzzy
-#| msgid "Assign money to atm"
 msgid "Assign Role to Employee {}"
 msgstr "تخصیص نقش به کارمند {}"
 
@@ -415,8 +377,6 @@ msgid "Invalid role"
 msgstr "نقش نامعتبر است"
 
 #: employee/views.py:118
-#, fuzzy
-#| msgid "No branch admin with {} national id"
 msgid "No employee with {} national id"
 msgstr "هیچ کارمندی با شماره‌ي ملی {} موجود نیست"
 
@@ -447,26 +407,18 @@ msgid ""
 msgstr "فردی با شماره‌ی ملی {} و رمز {} به مدیریت شعبه ارتقا یافت"
 
 #: modir/views.py:53
-#, fuzzy
-#| msgid "Loan report"
 msgid "Loan Report"
 msgstr "گزارش وام"
 
 #: modir/views.py:54
-#, fuzzy
-#| msgid "Amount"
 msgid "Account"
 msgstr "حساب"
 
 #: modir/views.py:54
-#, fuzzy
-#| msgid "Amount"
 msgid "Loan Amount"
 msgstr "مبلغ وام"
 
 #: modir/views.py:54
-#, fuzzy
-#| msgid "Amount"
 msgid "Benfit Amount"
 msgstr "مبلغ سود"
 
@@ -559,8 +511,6 @@ msgid "Loan request"
 msgstr "درخواست وام"
 
 #: profile/views.py:41
-#, fuzzy
-#| msgid "Create branch"
 msgid "Create card"
 msgstr "ساخت کارت"
 
@@ -596,11 +546,11 @@ msgstr "ساخت دست چک"
 msgid ""
 "Cheque book with id {} created for account number {}. Paper id's for this "
 "book are {}"
-msgstr "دست چک با شناسه‌ی {} برای حساب {} ساخته‌شد. شناسه‌ی برگه‌های این دست چک برابرند با {}"
+msgstr ""
+"دست چک با شناسه‌ی {} برای حساب {} ساخته‌شد. شناسه‌ی برگه‌های این دست چک برابرند "
+"با {}"
 
 #: service/views.py:104
-#, fuzzy
-#| msgid "Cheque transaction"
 msgid "Cheque Transaction"
 msgstr "تراکنش چک"
 
@@ -609,27 +559,19 @@ msgid "cheque id"
 msgstr "شناسه‌ی چک"
 
 #: service/views.py:107 service/views.py:415 transaction/views.py:26
-#, fuzzy
-#| msgid "Create account"
 msgid "destination account"
 msgstr "حساب مقصد"
 
 #: service/views.py:108 service/views.py:332 service/views.py:416
 #: service/views.py:509 transaction/views.py:27
-#, fuzzy
-#| msgid "Amount"
 msgid "amount"
 msgstr "مقدار نقدی"
 
 #: service/views.py:121
-#, fuzzy
-#| msgid "There is no account with account number {}"
 msgid "There is no cheque with id {}"
 msgstr "هیچ چکی با شناسه‌ی {} وجود ندارد"
 
 #: service/views.py:127
-#, fuzzy
-#| msgid "This employee has been created previously"
 msgid "Cheque with id {} has been used previously"
 msgstr "چک با شناسه‌ی {} قبلا استفاده‌ شده‌است"
 
@@ -644,8 +586,6 @@ msgstr "مبلغ نامعتبر است"
 
 #: service/views.py:191 service/views.py:214 service/views.py:251
 #: service/views.py:274
-#, fuzzy
-#| msgid "Verify cheque"
 msgid "Verify Cheque"
 msgstr "تایید چک"
 
@@ -658,8 +598,6 @@ msgid "Destination"
 msgstr "مفصد"
 
 #: service/views.py:228 service/views.py:288
-#, fuzzy
-#| msgid "No branch with id {}"
 msgid "No cheque with id {}"
 msgstr "هیچ چکی با شناسه‌ی {} وجود ندارد"
 
@@ -672,14 +610,10 @@ msgid "Pay Bill"
 msgstr "پرداخت قبض"
 
 #: service/views.py:330
-#, fuzzy
-#| msgid "Bill Name"
 msgid "bill name"
 msgstr "نام قبض"
 
 #: service/views.py:331 service/views.py:414 transaction/views.py:25
-#, fuzzy
-#| msgid "Create account"
 msgid "source account"
 msgstr "حساب مبدا"
 
@@ -688,20 +622,14 @@ msgid "owner"
 msgstr "دارنده‌"
 
 #: service/views.py:347
-#, fuzzy
-#| msgid "There is no account with account number {}"
 msgid "There is no bill with name {}"
 msgstr "هیچ قبضی با نام {} وجود ندارد"
 
 #: service/views.py:412
-#, fuzzy
-#| msgid "Periodic order creation"
 msgid "Periodic Order"
 msgstr "حواله‌ی منظم"
 
 #: service/views.py:417 service/views.py:510
-#, fuzzy
-#| msgid "Amount"
 msgid "count"
 msgstr "تعداد"
 
@@ -714,8 +642,6 @@ msgid "Daily: 1 - Weekly: 2 - Monthly: 3 - Yearly: 4"
 msgstr "روزانه: ۱ - هفتگی: ۲ - ماهانه: ۳ - سالانه: ۴"
 
 #: service/views.py:446 service/views.py:535
-#, fuzzy
-#| msgid "Amount should not be less than 10,000"
 msgid "count should be greater than 0"
 msgstr "تعداد باید بیشتر از صفر باشد"
 
@@ -732,14 +658,10 @@ msgid "Please enter valid type"
 msgstr "لطفا نوع معتبری وارد کنید"
 
 #: service/views.py:506
-#, fuzzy
-#| msgid "Loan request"
 msgid "Loan Request"
 msgstr "درخواست وام"
 
 #: service/views.py:508
-#, fuzzy
-#| msgid "Account Number"
 msgid "account number"
 msgstr "شماره‌ی حساب"
 
@@ -753,14 +675,10 @@ msgstr "بانک پول {} را ندارد"
 
 #: service/views.py:577 service/views.py:598 service/views.py:635
 #: service/views.py:656
-#, fuzzy
-#| msgid "Verify loan"
 msgid "Verify Loan"
 msgstr "تایید وام"
 
 #: service/views.py:612 service/views.py:670
-#, fuzzy
-#| msgid "No branch with id {}"
 msgid "No loan with id {}"
 msgstr "هیچ وامی با شناسه‌ی {} وجود ندارد"
 
@@ -769,8 +687,6 @@ msgid "Loan with id {} state updated"
 msgstr "وضعیت وام با شناسه‌ی {} به‌روز‌رسانی شد"
 
 #: transaction/views.py:23
-#, fuzzy
-#| msgid "Create transaction"
 msgid "Create Transaction"
 msgstr "ساخت تراکنش"
 
@@ -793,26 +709,18 @@ msgid "To Date"
 msgstr "تا تاریخ"
 
 #: transaction/views.py:127
-#, fuzzy
-#| msgid "national id"
 msgid "Cashier National Id"
 msgstr "شماره‌ی ملی صندوق‌دار"
 
 #: transaction/views.py:143
-#, fuzzy
-#| msgid "There is no account with account number {}"
 msgid "There is no cashier with national id {}"
 msgstr "هیچ صندوق‌داری با شماره‌ی ملی {} وجود ندارد"
 
 #: transaction/views.py:160
-#, fuzzy
-#| msgid "Auditor report"
 msgid "Auditor Transaction Report"
 msgstr "گزارش تراکنش برای حسابرس"
 
 #: transaction/views.py:161
-#, fuzzy
-#| msgid "Create account"
 msgid "Source Account"
 msgstr "حساب مبدا"
 
