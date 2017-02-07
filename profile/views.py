@@ -21,10 +21,9 @@ def home_page(request, user):
 
         {'role': 'Branch Admin', 'name': _('Create employee account'), 'href': '/employee/register_employee'},
         {'role': 'Branch Admin', 'name': _('Assign role'), 'href': '/employee/assign_role'},
-        {'role': 'Branch Admin', 'name': _('Define money'), 'href': '/'},
-        {'role': 'Branch Admin', 'name': _('Define atm'), 'href': '/'},
-        {'role': 'Branch Admin', 'name': _('Define minimum amount for atm'), 'href': '/'},
-        {'role': 'Branch Admin', 'name': _('Assign money to atm'), 'href': '/'},
+        {'role': 'Branch Admin', 'name': _('Define money'), 'href': '/atm/define_money'},
+        {'role': 'Branch Admin', 'name': _('Define atm'), 'href': '/atm/define_atm'},
+        {'role': 'Branch Admin', 'name': _('Define minimum amount for atm'), 'href': '/atm/define_minimum'},
         {'role': 'Branch Admin', 'name': _('Loan report'), 'href': '/'},
 
         {'role': 'Lawyer', 'name': _('Disable account'), 'href': '/customer/disable_account'},
@@ -40,14 +39,15 @@ def home_page(request, user):
         {'role': 'Cashier', 'name': _('Profile transaction report'), 'href': '/'},
         {'role': 'Cashier', 'name': _('Periodic order creation'), 'href': '/service/create_perodic_order'},
         {'role': 'Cashier', 'name': _('Loan request'), 'href': '/service/loan_request'},
+        {'role': 'Cashier', 'name': _('Create card'), 'href': '/atm/create_card'},
 
         {'role': 'Auditor', 'name': _('Verify cheque'), 'href': '/service/verify_auditor_cheque'},
         {'role': 'Auditor', 'name': _('Verify loan'), 'href': '/service/verify_auditor_loan'},
         {'role': 'Auditor', 'name': _('Auditor report'), 'href': '/'},
 
-        {'role': 'ATM Master', 'name': _('Put money in atm'), 'href': '/'},
+        {'role': 'ATM Master', 'name': _('Put money in atm'), 'href': '/atm/assign_money'},
 
-        {'role': 'Customer', 'name': _('ATM transaction'), 'href': '/'},
+        {'role': 'Customer', 'name': _('ATM transaction'), 'href': '/atm/atm_transaction'},
     ]
 
     if hasattr(user.profile, 'bankadmin'):
