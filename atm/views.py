@@ -9,6 +9,7 @@ from client.views import client_form
 from customer.models import Account
 from employee.models import Employee
 from handlers import ValidateRole
+from ibank.mailhandler import sendMail
 from transaction.models import Transaction
 
 

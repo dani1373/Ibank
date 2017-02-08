@@ -6,7 +6,6 @@ from customer.models import Account
 
 
 class ChequeBook(models.Model):
-    # TODO one user one cheque
     account = models.ForeignKey(Account)
 
 

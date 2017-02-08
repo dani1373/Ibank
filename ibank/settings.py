@@ -14,6 +14,8 @@ import os
 from django.utils.translation import ugettext_lazy as _
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+from selenium import webdriver
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -38,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_cron',
     'profile',
     'modir',
     'customer',
@@ -134,3 +137,14 @@ LANGUAGES = [
     ('fa', _('Persian')),
 ]
 LOCALE_PATHS = (os.path.join(BASE_DIR, 'locale'), )
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'sadfall95ibank@gmail.com'
+EMAIL_HOST_PASSWORD = 'ibank12345678'
+EMAIL_PORT = 587
+CRON_CLASSES = [
+    'ibank.crons.PeriodicResolver',
+    'ibank.crons.MailNotifier'
+]
+SELENIUM_DRIVER=webdriver.Chrome

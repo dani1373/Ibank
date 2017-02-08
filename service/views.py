@@ -8,6 +8,7 @@ from bank.models import Bank
 from client.views import client_form, client_listh
 from customer.models import Account
 from handlers import ValidateRole
+from ibank.mailhandler import sendMail
 from service.models import BillType, ChequeBook, Cheque, Bill, PeriodicOrder, Loan
 from transaction.models import Transaction
 
@@ -156,7 +157,6 @@ def cheque_transaction(request):
             if amount + transaction_commission > source_account.credit:
                 data['error'] = True
                 data['message'] = _('Your account has not enough credit')
-                # TODO notify
                 return client_form(request, data=data)
 
             destination_account = None
@@ -232,7 +232,6 @@ def lawyer_cheque(request, cheque_id, state):
 
         if state == 'accept':
             cheque.state = 'WA'
-            # TODO NOTIFY
         else:
             cheque.state = 'DL'
         cheque.save()
@@ -292,7 +291,6 @@ def auditor_cheque(request, cheque_id, state):
 
         if state == 'accept':
             cheque.state = 'V'
-            # TODO NOTIFY
         else:
             cheque.state = 'DA'
         cheque.save()
@@ -616,7 +614,6 @@ def lawyer_loan(request, loan_id, state):
 
         if state == 'accept':
             loan.state = 'WA'
-            # TODO NOTIFY
         else:
             loan.state = 'DL'
         loan.save()
@@ -674,7 +671,6 @@ def auditor_loan(request, loan_id, state):
 
         if state == 'accept':
             loan.state = 'V'
-            # TODO NOTIFY
         else:
             loan.state = 'DA'
         loan.save()

@@ -13,6 +13,7 @@ from client.views import client_form, client_listh
 from customer.models import Account
 from employee.models import Employee
 from handlers import ValidateRole
+from ibank.mailhandler import sendMail
 from transaction.models import Transaction
 
 
@@ -165,7 +166,6 @@ def auditor_report_result(request, from_date, to_date, cashier):
     if request.method == 'GET':
         begin = datetime.strptime(from_date, "%Y-%m-%d %H:%M:%S")
         end = datetime.strptime(to_date, "%Y-%m-%d %H:%M:%S")
-        print begin, end
         if cashier == '0':
             transactions = Transaction.objects.filter(create_time__gte=begin, create_time__lt=end, type__in=['D', 'W'],
                                                       employee__isnull=False)
@@ -258,16 +258,16 @@ def profile_report(request):
 
 def notify_customer():
     now = datetime.now()
-    from_time = datetime(now.year, now.month, now.day, now.hour, now.minute)
+    from_time = datetime(now.year, now.month, now.day, now.hour, now.minute) - timedelta(minutes=1)
 
     for transaction in Transaction.objects.filter(create_time__gte=from_time):
-        if transaction.destination_account:
-            sendMail(title='Ibank Withdraw', message='We took %s amount from your bank account %s' %
+        if transaction.destination_account and int(transaction.destination_account.account_number) != 1:
+            sendMail(title='Ibank Withdraw', message='We add %s amount to your bank account %s' %
                                                      (transaction.amount,
                                                       transaction.destination_account.account_number),
                      to=transaction.destination_account.customer.profile.user.email)
-        if transaction.source_account:
-            sendMail(title='Ibank Deposit', message='We add %s amount to your bank account %s' %
+        if transaction.source_account and int(transaction.source_account.account_number) != 1:
+            sendMail(title='Ibank Deposit', message='We took %s amount from your bank account %s' %
                                                     (transaction.amount,
                                                      transaction.source_account.account_number),
-                     to=transaction.destination_account.customer.profile.user.email)
+                     to=transaction.source_account.customer.profile.user.email)
